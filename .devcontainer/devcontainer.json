@@ -1,0 +1,41 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "Go, Amplify & AI Dev Env",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    // AWS CLI
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    // Docker in Docker (EC2用コンテナビルドに必須)
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    },
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  
+  // 秘密情報(.env)をコンテナに渡す設定
+  "runArgs": ["--env-file", ".devcontainer/.env"],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker",
+        "amazonwebservices.aws-toolkit-vscode",
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github"
+      ],
+      "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true,
+        "go.gopath": "/go"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
